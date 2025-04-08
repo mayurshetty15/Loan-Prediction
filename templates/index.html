@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Loan Approval Prediction</h1>
+            <p>Use machine learning models to predict loan approval</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <h2>Applicant Information</h2>
+                <form id="prediction-form">
+                    <div class="form-group">
+                        <label for="model-type">Select Model:</label>
+                        <select id="model-type" name="model_type" required>
+                            <option value="">-- Select Model --</option>
+                            <option value="knn">K-Nearest Neighbors</option>
+                            <option value="gaussian_naive_bayes">Gaussian Naive Bayes</option>
+                            <option value="decision_tree">Decision Tree</option>
+                            <option value="random_forest">Random Forest</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="no_of_dependents">Number of Dependents:</label>
+                            <input type="number" id="no_of_dependents" name="no_of_dependents" min="0" required value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="education">Education:</label>
+                            <select id="education" name="education" required>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Not Graduate">Not Graduate</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="self_employed">Self Employed:</label>
+                            <select id="self_employed" name="self_employed" required>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="income_annum">Annual Income ($):</label>
+                            <input type="number" id="income_annum" name="income_annum" min="0" required value="50000">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="loan_amount">Loan Amount ($):</label>
+                            <input type="number" id="loan_amount" name="loan_amount" min="0" required value="120000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loan_term">Loan Term (Years):</label>
+                            <input type="number" id="loan_term" name="loan_term" min="1" required value="360">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cibil_score">CIBIL Score:</label>
+                            <input type="number" id="cibil_score" name="cibil_score" min="300" max="900" required value="700">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="residential_assets_value">Residential Assets Value ($):</label>
+                            <input type="number" id="residential_assets_value" name="residential_assets_value" min="0" required value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="commercial_assets_value">Commercial Assets Value ($):</label>
+                            <input type="number" id="commercial_assets_value" name="commercial_assets_value" min="0" required value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="luxury_assets_value">Luxury Assets Value ($):</label>
+                            <input type="number" id="luxury_assets_value" name="luxury_assets_value" min="0" required value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bank_asset_value">Bank Asset Value ($):</label>
+                            <input type="number" id="bank_asset_value" name="bank_asset_value" min="0" required value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="submit" id="predict-button">Predict Loan Approval</button>
+                        <button type="button" id="reset-button">Reset Form</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="results-section">
+                <h2>Prediction Results</h2>
+                <div id="results-container">
+                    <p class="no-results">Fill the form and click Predict to see results</p>
+                </div>
+                
+                <div id="prediction-container" class="hidden">
+                    <div class="prediction-header">
+                        <h3>Loan Prediction</h3>
+                        <span id="model-used"></span>
+                    </div>
+                    
+                    <div id="prediction-result" class="prediction-card">
+                    </div>
+
+                
+                <div id="model-info-container">
+                    <h3>About the Models</h3>
+                    <div id="model-info-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
